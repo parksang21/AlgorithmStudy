@@ -18,19 +18,30 @@ public:
 
     //각 노드들의 합을 구해주는 함수
     void sum(){
-        int index = base;
-        while(index > 0){
-            index >>= 1;
+        int index = base - 1;
+        while(index >= 1){
             tree[index] = tree[index * 2] + tree[index * 2 + 1];
+            index--;
         }
     }
 
-    int quary(int targetL, int targetR, int curL, int curR, int index){
+    long long quary(int targetL, int targetR, int curL, int curR, int index){
         if(curL > targetR || curR < targetL) return 0;
         if( targetL <= curL && curR <= targetR) return tree[index];
         int mid = (curL + curR) >> 1;
+    
         return quary(targetL, targetR, curL, mid, index *2)
-               + quary(targetL, targetR, mid + 1, curR, index * 2 + 1);
+        + quary(targetL, targetR, mid + 1, curR, index * 2 + 1);
+    }
+
+    void update(int index, long long data){
+        index += base - 1;
+        tree[index] = data;
+        index >>= 1;
+        while(index >= 1){
+            tree[index] = tree[index * 2] + tree[index * 2 + 1];
+            index >>= 1;
+        }
     }
 
     // 출력해주는 함수
