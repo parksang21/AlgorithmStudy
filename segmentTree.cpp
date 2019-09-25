@@ -58,3 +58,11 @@ public:
     }
 
 };
+
+
+int main(){
+
+    std::cout << "asdf" << endl;
+
+    return 0;
+}
