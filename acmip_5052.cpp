@@ -10,6 +10,7 @@ class Trie{
     bool expoint, nextis;
 
 public:
+
     Trie(){
         memset(next, 0, sizeof(next));
         expoint = nextis = false;
