@@ -6,6 +6,7 @@
 #include <stdio.h>
 #include <vector>
 #include <string.h>
+#include <iostream>
 
 using namespace std;
 
@@ -14,22 +15,30 @@ int N, M;
 vector<int> list[10001];
 bool check[10001];
 int COUNT = 0;
-int TOTAL = 0;
+int ans = 1000000000;
 
 void dfs(int vertex){
 
     COUNT++;
     check[vertex] = true;
+//    cout << vertex << "-> ";
 
     if(vertex == N*M){
-        TOTAL = COUNT;
+        if(COUNT < ans){
+            ans = COUNT;
+//            cout << "end \n";
+        }
+        check[vertex]=false;
+        COUNT--;
         return;
     }
 
-    for(int i=list[vertex].size()-1; i>=0; i--)
+    for(int i=0; i<list[vertex].size(); i++)
         if(!check[list[vertex][i]]) dfs(list[vertex][i]);
 
-
+    COUNT--;
+    check[vertex]=false;
+//    cout << "\ncancle...." << vertex << "\n";
 }
 
 int main(){
@@ -58,7 +67,7 @@ int main(){
 
     dfs(1);
 
-    printf("%d\n", TOTAL);
+    printf("%d\n", ans);
 
     return 0;
 }
