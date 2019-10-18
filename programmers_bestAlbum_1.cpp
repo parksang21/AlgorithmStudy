@@ -75,7 +75,7 @@ int func(int k, int i){ return (i+k)%mod;};
 
 
 int stringHash(string str){
-    int m = 101;
+    int m = 1e9;
     int p = 31;
     int pow_p = 1;
 
@@ -97,8 +97,8 @@ void swapG(G* &first, G* &second){
 vector<int> solution(vector<string> genres, vector<int> plays) {
     vector<int> answer;
 
-    G *g[101];
-    for(int i=0; i<101; i++) g[i] = 0;
+    G *g[200];
+    for(int i=0; i<200; i++) g[i] = 0;
 
     int biggest = 0, index = 0;
     for(int i=0; i<genres.size(); i++){
@@ -134,9 +134,9 @@ vector<int> solution(vector<string> genres, vector<int> plays) {
 
     swapG(g[index], g[0]);
 
-    for(int i=0; i<101; i++){
+    for(int i=0; i<200; i++){
         if(!g[i]) continue;
-        for(int j=i; j<101; j++){
+        for(int j=i; j<200; j++){
             if(!g[j]) continue;
             if(g[i]->total_play < g[j]->total_play){
                 swapG(g[i], g[j]);
